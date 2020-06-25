@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Switch } from 'react-native';
+import { StyleSheet, Text, View, Switch as Switch1 } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { useFonts } from '@expo-google-fonts/montserrat';
+import { AppLoading } from 'expo';
+
 
 
 export default function App() {
 
   const [ligth, setLigth] = useState(false);
   let lightState
+
+  let [fontsLoaded] = useFonts({
+    museo: require('./assets/fonts/MuseoModerno-Thin.ttf'),
+  });
 
   async function switchLight(v) {
     try {
@@ -17,22 +25,31 @@ export default function App() {
     }    
   }
   
-
-  return (
-    <View style={styles.container}>
-      <Text>LynxAR</Text>
-      <Switch
-        value={ligth}
-        onValueChange={v => {
-          setLigth(v)
-          switchLight(v)
-        }}
-      />
-      <Text>{ligth? 'On': 'Off'}</Text>
-      
-      
-    </View>
-  );
+  
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <PaperProvider>
+        <View style={styles.container}>
+          <Text style={styles.titulo}>Lynx<Text style={styles.tituloAR}>AR</Text> </Text>
+          <Switch1
+            style={{ transform: [ {scaleX: 4},{scaleY: 4} ] }}
+            // trackColor={{ false: "#fff", true: "#222" }}
+            thumbColor={ligth ? "#70a3ae" : "#999"}
+            value={ligth}
+            onValueChange={v => {
+              setLigth(v)
+              switchLight(v)
+            }}
+          />
+          <Text style={styles.luz}>{ligth? 'On': 'Off'}</Text>
+          
+          
+        </View>
+      </PaperProvider>
+    );
+  }
 }
 
 
@@ -42,6 +59,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+  },
+  titulo: {
+    fontSize: 50,
+    fontFamily: 'museo',
+    color: '#666'
+  },
+  tituloAR: {
+    fontSize: 50,
+    fontFamily: 'museo',
+    color: '#70a3ae'
+  },
+  luz: {
+    fontSize: 40,
+    fontFamily: 'museo',
+    color: '#555'
   },
 });

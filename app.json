@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "lynxAR",
-    "slug": "lynxAR",
+    "name": "LynxAR Automate",
+    "slug": "lynxARautomate",
     "platforms": [
       "ios",
       "android",
@@ -13,7 +13,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#70a3ae"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,7 +22,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lynxar.lynxarautomate",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.lynxar.lynxarautomate",
+      "versionCode": 1
     }
   }
 }
